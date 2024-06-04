@@ -1,7 +1,5 @@
 package machine
 
-import kotlin.math.min
-
 open class CoffeeMachine {
     private var availableMoney = 550
     private var availableWater = 400
@@ -9,10 +7,10 @@ open class CoffeeMachine {
     private var availableBeans = 120
     private var availableCups = 9
 
-    protected open var moneyPerCup = 0
-    protected open var waterPerCup = 0
-    protected open var milkPerCup = 0
-    protected open var beansPerCup = 0
+    private var moneyPerCup = 0
+    private var waterPerCup = 0
+    private var milkPerCup = 0
+    private var beansPerCup = 0
 
     private fun setEspresso() {
         moneyPerCup = 4; waterPerCup = 250; milkPerCup = 0; beansPerCup = 16
@@ -23,20 +21,6 @@ open class CoffeeMachine {
     private fun setCappuccino(){
         moneyPerCup = 6; waterPerCup = 200; milkPerCup = 100; beansPerCup = 12
     }
-
-//    fun quantityOfIngredients(type: Int, cntCups: Int){
-//        when(type){
-//            1 -> setEspresso()
-//            2 -> setLatte()
-//            3 -> setLatte()
-//        }
-//        println("""
-//            For $cntCups cups of coffee you will need:
-//            ${cntCups * waterPerCup} ml of water
-//            ${cntCups * milkPerCup} ml of milk
-//            ${cntCups * beansPerCup} g of coffee beans
-//        """.trimIndent())
-//    }
 
     private fun availableResources(): Boolean {
         val result = when {
@@ -105,39 +89,16 @@ open class CoffeeMachine {
 
 fun main() {
     val coffeeMachine = CoffeeMachine()
-    //Task 1
-//    println("Write how many cups of coffee you will need:")
-//    val cntCups = readln().toInt()
-//    coffeeMachine.quantityOfIngredients(cntCups)
-
-    //Task 2
-//    println("Write how many ml of water the coffee machine has:")
-//    coffeeMachine.addWater(readln().toInt())
-//    println("Write how many ml of milk the coffee machine has:")
-//    coffeeMachine.addMilk(readln().toInt())
-//    println("Write how many grams of coffee beans the coffee machine has:")
-//    coffeeMachine.addBeans(readln().toInt())
-//    println("Write how many cups of coffee you will need:")
-//    val needCups = readln().toInt()
-//    val availableCups = coffeeMachine.availableCupDrink(1)
-//    println(
-//        when {
-//            availableCups > needCups -> "Yes, I can make that amount of coffee (and even ${availableCups - needCups} more than that)"
-//            availableCups == needCups -> "Yes, I can make that amount of coffee"
-//            else -> "No, I can make only $availableCups cups of coffee"
-//        }
-//    )
-
-    // Task 5
     while (true) {
         println("Write action (buy, fill, take, remaining, exit): ")
-        val action = readln()
+        val action = readln().lowercase()
         when (action) {
             "buy" -> coffeeMachine.buy()
             "fill" -> coffeeMachine.fill()
             "take" -> coffeeMachine.take()
             "remaining" -> coffeeMachine.status()
             "exit" -> break
+            else -> { println("Unknown action"); continue }
         }
     }
 }
